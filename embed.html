@@ -7,7 +7,7 @@
     <script>
         function updateIframe() {
             const inputValue = document.getElementById('inputBox').value;
-            const baseURL = 'https://esriireland.maps.arcgis.com//apps/instant/media/index.html?appid=5ddc8ab32ff747e9918c740215a9bfc3&level=18&property=';
+            const baseURL = 'https://esriireland.maps.arcgis.com/apps/instant/media/index.html?appid=5ddc8ab32ff747e9918c740215a9bfc3&level=18&property=';
             const fullURL = baseURL + encodeURIComponent(inputValue);
             document.getElementById('arcgisIframe').src = fullURL;
         }
