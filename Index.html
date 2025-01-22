@@ -7,7 +7,7 @@
     <script>
         function redirectToArcGIS() {
             const inputValue = document.getElementById('inputBox').value;
-            const baseURL = 'https://https://esriireland.maps.arcgis.com/apps/instant/media/index.html?appid=5ddc8ab32ff747e9918c740215a9bfc3&level=19&property=';
+            const baseURL = 'https://esriireland.maps.arcgis.com/apps/instant/media/index.html?appid=5ddc8ab32ff747e9918c740215a9bfc3&level=19&property=';
             const fullURL = baseURL + encodeURIComponent(inputValue);
             window.location.href = fullURL;
         }
