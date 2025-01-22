@@ -1,74 +1,64 @@
-<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Search Feature Layer</title>
-  <link rel="stylesheet" href="https://js.arcgis.com/4.21/esri/themes/light/main.css">
-  <script src="https://js.arcgis.com/4.21/"></script>
-  <style>
-    html, body, #viewDiv {
-      padding: 0;
-      margin: 0;
-      height: 100%;
-      width: 100%;
-    }
-    #searchDiv {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      z-index: 10;
-      background: white;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property ID Search</title>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.25/esri/themes/light/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/@esri/calcite-components/dist/calcite/calcite.css">
+  <script src="https://js.arcgis.com/4.25/"></script>
+  <script type="module" src="https://unpkg.com/@esri/calcite-components/dist/calcite/calcite.esm.js"></script>
+  <script nomodule src="https://unpkg.com/@esri/calcite-components/dist/calcite/calcite.js"></script>
 </head>
 <body>
-  <div id="viewDiv"></div>
-  <div id="searchDiv">
-    <input type="text" id="searchInput" placeholder="Search...">
-    <button onclick="searchFeatureLayer()">Search</button>
-  </div>
+  <calcite-shell>
+    <calcite-shell-panel slot="primary-panel" position="start">
+      <calcite-input id="propertyIdInput" placeholder="Enter Property ID" type="text"></calcite-input>
+      <calcite-button id="searchButton">Search</calcite-button>
+    </calcite-shell-panel>
+    <calcite-shell-panel slot="center-panel">
+      <div id="viewDiv" style="height: 100vh;"></div>
+    </calcite-shell-panel>
+  </calcite-shell>
+
   <script>
     require([
       "esri/Map",
       "esri/views/MapView",
       "esri/layers/FeatureLayer",
-      "esri/tasks/support/Query"
-    ], function(Map, MapView, FeatureLayer, Query) {
-      var map = new Map({
+      "esri/widgets/Search"
+    ], function(Map, MapView, FeatureLayer, Search) {
+      const map = new Map({
         basemap: "streets-navigation-vector"
       });
 
-      var view = new MapView({
+      const view = new MapView({
         container: "viewDiv",
         map: map,
         center: [-118.805, 34.027],
         zoom: 13
       });
 
-      var featureLayer = new FeatureLayer({
+      const featureLayer = new FeatureLayer({
         url: "https://services.arcgis.com/pMnvm7HXxTmNXxGi/arcgis/rest/services/ValuationProperties/FeatureServer"
       });
 
-      map.add(featureLayer);
+      const searchButton = document.getElementById("searchButton");
+      const propertyIdInput = document.getElementById("propertyIdInput");
 
-      window.searchFeatureLayer = function() {
-        var searchValue = document.getElementById("searchInput").value;
-        var query = featureLayer.createQuery();
-        query.where = "PropertyID LIKE '%" + searchValue + "%'";
-        query.returnGeometry = true;
-        query.outFields = ["*"];
-
-        featureLayer.queryFeatures(query).then(function(result) {
-          if (result.features.length > 0) {
-            view.goTo(result.features[0].geometry);
-          } else {
-            alert("No results found");
-          }
-        });
-      };
+      searchButton.addEventListener("click", function() {
+        const propertyId = propertyIdInput.value;
+        if (propertyId) {
+          const query = featureLayer.createQuery();
+          query.where = `propertyid = '${propertyId}'`;
+          featureLayer.queryFeatures(query).then(function(result) {
+            if (result.features.length > 0) {
+              view.goTo(result.features[0].geometry);
+            } else {
+              alert("No property found with that ID.");
+            }
+          });
+        }
+      });
     });
   </script>
 </body>
