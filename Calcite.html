@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcGIS Online Instant App</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/calcite-components/1.0.0-beta.82/calcite.css">
+    <script type="module" src="https://js.arcgis.com/calcite-components/1.0.0-beta.82/calcite.esm.js"></script>
+    <script nomodule src="https://js.arcgis.com/calcite-components/1.0.0-beta.82/calcite.js"></script>
+    <script>
+        function updateIframe() {
+            const inputValue = document.getElementById('inputBox').value;
+            const baseURL = 'https://esriireland.maps.arcgis.com/apps/instant/media/index.html?appid=5ddc8ab32ff747e9918c740215a9bfc3&level=18&property=';
+            const fullURL = baseURL + encodeURIComponent(inputValue);
+            document.getElementById('arcgisIframe').src = fullURL;
+        }
+    </script>
+</head>
+<body>
+    <calcite-shell>
+        <calcite-shell-panel slot="primary-panel">
+            <h1>ArcGIS Online Instant App - Pass param Example</h1>
+            <calcite-label>
+                Enter Parameter (e.g., 537420):
+                <calcite-input id="inputBox" name="inputBox" value="111111"></calcite-input>
+            </calcite-label>
+            <calcite-button onclick="updateIframe()">Submit</calcite-button>
+        </calcite-shell-panel>
+        <calcite-shell-panel slot="center-panel">
+            <iframe id="arcgisIframe" width="100%" height="700px" frameborder="0"></iframe>
+        </calcite-shell-panel>
+    </calcite-shell>
+</body>
+</html>
