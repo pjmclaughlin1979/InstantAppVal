@@ -57,7 +57,7 @@
       window.searchFeatureLayer = function() {
         var searchValue = document.getElementById("searchInput").value;
         var query = featureLayer.createQuery();
-        query.where = "yourFieldName LIKE '%" + searchValue + "%'";
+        query.where = "PropertyID LIKE '%" + searchValue + "%'";
         query.returnGeometry = true;
         query.outFields = ["*"];
 
