@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -46,10 +47,10 @@
       const propertyIdInput = document.getElementById("propertyIdInput");
 
       searchButton.addEventListener("click", function() {
-        const propertyId = propertyIdInput.value;
-        if (propertyId) {
+        const PropertyID = propertyIdInput.value;
+        if (PropertyID) {
           const query = featureLayer.createQuery();
-          query.where = `propertyid = '${propertyId}'`;
+          query.where = `PropertyID = '${PropertyID}'`;
           featureLayer.queryFeatures(query).then(function(result) {
             if (result.features.length > 0) {
               view.goTo(result.features[0].geometry);
