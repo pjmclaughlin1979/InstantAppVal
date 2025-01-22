@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcGIS Online Instant App</title>
+    <script>
+        function redirectToArcGIS() {
+            const inputValue = document.getElementById('inputBox').value;
+            const baseURL = 'https://www.arcgis.com/apps/instant/media/index.html?appid=5ddc8ab32ff747e9918c740215a9bfc3&property=';
+            const fullURL = baseURL + encodeURIComponent(inputValue);
+            window.location.href = fullURL;
+        }
+    </script>
+</head>
+<body>
+    <h1>ArcGIS Online Instant App</h1>
+    <label for="inputBox">Enter Parameter:</label>
+    <input type="text" id="inputBox" name="inputBox">
+    <button onclick="redirectToArcGIS()">Submit</button>
+</body>
+</html>
