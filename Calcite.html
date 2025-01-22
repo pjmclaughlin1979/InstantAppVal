@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ArcGIS Online Instant App</title>
-    <link rel="stylesheet" href="https://js.arcgis.com/calcite-components/1.0.0-beta.82/calcite.css">
-    <script type="module" src="https://js.arcgis.com/calcite-components/1.0.0-beta.82/calcite.esm.js"></script>
-    <script nomodule src="https://js.arcgis.com/calcite-components/1.0.0-beta.82/calcite.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@esri/calcite-components/dist/calcite.css">
+    <script type="module" src="https://unpkg.com/@esri/calcite-components/dist/calcite.js"></script>
     <script>
         function updateIframe() {
             const inputValue = document.getElementById('inputBox').value;
@@ -17,18 +16,15 @@
     </script>
 </head>
 <body>
-    <calcite-shell>
-        <calcite-shell-panel slot="primary-panel">
-            <h1>ArcGIS Online Instant App - Pass param Example</h1>
-            <calcite-label>
-                Enter Parameter (e.g., 537420):
-                <calcite-input id="inputBox" name="inputBox" value="111111"></calcite-input>
-            </calcite-label>
-            <calcite-button onclick="updateIframe()">Submit</calcite-button>
-        </calcite-shell-panel>
-        <calcite-shell-panel slot="center-panel">
+    <div class="calcite-theme-light">
+        <div style="max-width: 800px; margin: 0 auto; padding: 20px;">
+            <h1>ArcGIS Online Instant App - Pass Parameter Example</h1>
+            <label for="inputBox">Enter Parameter (e.g., 537420):</label><br>
+            <calcite-input id="inputBox" value="111111" placeholder="Enter parameter..."></calcite-input><br>
+            <calcite-button appearance="solid" onclick="updateIframe()">Submit</calcite-button>
+            <br><br>
             <iframe id="arcgisIframe" width="100%" height="700px" frameborder="0"></iframe>
-        </calcite-shell-panel>
-    </calcite-shell>
+        </div>
+    </div>
 </body>
 </html>
